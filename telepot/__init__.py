@@ -73,7 +73,7 @@ all_content_types = [
     'contact', 'location', 'venue', 'new_chat_member', 'left_chat_member', 'new_chat_title',
     'new_chat_photo',  'delete_chat_photo', 'group_chat_created', 'supergroup_chat_created',
     'channel_chat_created', 'migrate_to_chat_id', 'migrate_from_chat_id', 'pinned_message',
-    'new_chat_members', 'invoice', 'successful_payment'
+    'new_chat_members', 'invoice', 'successful_payment', 'poll'
 ]
 
 def glance(msg, flavor='chat', long=False):
@@ -697,6 +697,14 @@ class Bot(_BotBase):
         """ See: https://core.telegram.org/bots/api#sendcontact """
         p = _strip(locals())
         return self._api_request('sendContact', _rectify(p))
+    
+    def sendPoll(self, chat_id, question, options,
+                 disable_notification=None,
+                 reply_to_message_id=None,
+                 reply_markup=None):
+    """ See: https://core.telegram.org/bots/api#sendpoll """
+    p = _strip(locals())
+    return self._api_request('sendPoll', _rectify(p))
 
     def sendGame(self, chat_id, game_short_name,
                  disable_notification=None,
